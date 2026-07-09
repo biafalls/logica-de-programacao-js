@@ -96,3 +96,204 @@ console.log(status);
 // Gera um número inteiro aleatório entre 1 e 10
 let numeroSecreto = Math.floor(Math.random() * 10) + 1;
 ```
+---
+---
+# 💻 Lógica de Programação: Explore Funções e Listas
+
+Este guia prático foi desenvolvido para consolidar os conceitos essenciais de manipulação do DOM (Document Object Model), trabalho com funções de diversos tipos, manipulação de arrays (listas) e integração de recursos externos como síntese de voz.
+
+---
+
+## 1. Manipulação do DOM e Elementos HTML
+
+O DOM é a representação estruturada do seu documento HTML que permite ao JavaScript interagir com as páginas web, alterando textos, estilos e comportamentos.
+
+### `document.querySelector()`
+O método `querySelector` permite selecionar o **primeiro** elemento da página que corresponde a um seletor CSS específico (como um nome de tag, uma classe ou um ID).
+
+```javascript
+// Selecionando por tag
+let titulo = document.querySelector('h1');
+
+// Selecionando por classe
+let paragrafo = document.querySelector('.texto-destaque');
+
+// Selecionando por ID
+let botaoEspecial = document.querySelector('#btn-enviar');
+```
+
+### `document.getElementById()`
+Diferente do `querySelector`, o `getElementById` é uma forma mais direta e performática de selecionar um elemento quando você já sabe o seu id único. Não é necessário utilizar a hashtag (#).
+
+```javaScript
+// Selecionando o elemento <div id="resultado"></div>
+let areaResultado = document.getElementById('resultado');
+```
+
+### `.innerHTML` vs `.value`
+Ambas são propriedades usadas para acessar ou modificar o conteúdo de elementos, mas aplicam-se a cenários totalmente diferentes:
+
+* `.innerHTML`: Utilizado para ler ou alterar o conteúdo interno de texto e tags de um elemento (como `<h1>`, `<p>`, `<div>`).
+* `.value`: Utilizado especificamente para ler ou alterar o valor inserido dentro de campos de entrada de dados (como `<input>`, `<textarea>`, `<select>`).
+
+```javaScript
+// Alterando o texto de um título na página
+document.querySelector('h1').innerHTML = 'Bem-vindo ao Jogo!';
+
+// Capturando o que o usuário digitou em um campo de texto
+let chute = document.querySelector('input').value;
+```
+
+### 2. Eventos e Interatividade
+O evento `onclick` serve para acionar uma função JavaScript no momento exato em que o usuário clica em um elemento HTML (geralmente um `<button>`).
+
+No HTML:
+
+```html
+<button onclick="verificarChute()">Enviar Chute</button>
+```
+
+No JavaScript:
+
+```javaScript
+function verificarChute() {
+    console.log('O botão foi clicado e a função executada!');
+}
+```
+
+### `setAttribute` e `removeAttribute`
+Estes métodos permitem modificar os atributos de tags HTML dinamicamente (como desabilitar um botão, alterar a imagem de um elemento, mudar links, etc.).
+
+* `setAttribute(atributo, valor)`: Adiciona ou modifica o valor de um atributo.
+* `removeAttribute(atributo)`: Remove completamente um atributo do elemento.
+
+```javaScript
+let botaoReiniciar = document.querySelector('#reiniciar');
+
+// Desabilitando o botão adicionando o atributo HTML 'disabled'
+botaoReiniciar.setAttribute('disabled', 'true');
+
+// Habilitando o botão novamente removendo o atributo 'disabled'
+botaoReiniciar.removeAttribute('disabled');
+```
+
+## 3. Mergulhando em Funções
+Funções são blocos de código reaproveitáveis que executam tarefas específicas.
+
+### Função sem parâmetro e sem retorno
+Apenas executa um bloco de comandos quando chamada, sem precisar de informações externas e sem devolver dados para quem a chamou.
+
+```javaScript
+function exibirMensagemInicial() {
+    document.querySelector('p').innerHTML = 'Escolha um número entre 1 e 10';
+}
+// Chamada da função:
+exibirMensagemInicial();
+```
+
+### Função com parâmetro e sem retorno
+Recebe dados externos (variáveis ou valores) para dentro do seu escopo, permitindo que o comportamento mude dinamicamente com base no que foi enviado.
+
+```JavaScript
+function exibirTextoNaTela(tag, texto) {
+    let campo = document.querySelector(tag);
+    campo.innerHTML = texto;
+}
+// Chamada da função enviando argumentos:
+exibirTextoNaTela('h1', 'Jogo do Número Secreto');
+exibirTextoNaTela('p', 'Tente adivinhar o número!');
+```
+
+### Função com parâmetro e com retorno
+Além de receber dados, realiza um processamento interno e devolve (retorna) um valor para o ponto onde foi chamada. Esse valor pode ser armazenado em variáveis.
+
+```JavaScript
+function calcularDobro(numero) {
+    return numero * 2;
+}
+// Armazenando o resultado do retorno
+let resultado = calcularDobro(5); // resultado será 10
+```
+
+### Função Anônima
+É uma função que não possui um nome explícito. Geralmente é atribuída a uma variável ou passada diretamente como argumento para outra função ou evento.
+
+```JavaScript
+let saudar = function() {
+    console.log('Olá, Mundo!');
+};
+// Executando a função anônima:
+saudar();
+```
+
+### Arrow Function (Função de Seta)
+Uma sintaxe moderna e simplificada para escrever funções em JavaScript introduzida no ES6. Muito utilizada para funções anônimas e callbacks.
+
+```JavaScript
+// Sintaxe padrão de Arrow Function
+let somar = (a, b) => {
+    return a + b;
+};
+
+// Sintaxe super reduzida (quando possui apenas 1 linha de retorno)
+let subtrair = (a, b) => a - b;
+
+console.log(somar(10, 5)); // 15
+```
+
+## 4. Formatando Números
+### `toFixed()`
+O método `toFixed()` é usado para formatar um número controlando a quantidade de casas decimais que serão exibidas após o ponto. Ele também realiza o arredondamento matemático automático e retorna o valor formatado como uma string.
+
+```JavaScript
+let precoOriginal = 19.99345;
+
+// Formatando para 2 casas decimais
+let precoFormatado = precoOriginal.toFixed(2); 
+
+console.log(precoFormatado); // Saída: "19.99" (Tipo String)
+```
+
+## 5. Estruturas de Dados: Arrays (Listas)
+Arrays são coleções ordenadas de elementos capazes de armazenar múltiplos valores sob uma única variável.
+
+Como criar listas
+
+```JavaScript
+// Criando uma lista vazia
+let listaVazia = [];
+
+// Criando uma lista já populada (com dados)
+let frutas = ['Maçã', 'Banana', 'Morango'];
+```
+
+### Propriedades e Métodos Fundamentais de Arrays
+* `length` (Propriedade): Retorna o tamanho total da lista (quantidade de elementos).
+
+```JavaScript
+console.log(frutas.length); // Saída: 3
+```
+
+* `push(elemento)`: Adiciona um ou mais elementos ao final da lista.
+
+```JavaScript
+frutas.push('Melancia');
+console.log(frutas); // Saída: ['Maçã', 'Banana', 'Morango', 'Melancia']
+```
+* `pop()`: Remove o último elemento da lista e o retorna.
+
+```JavaScript
+let ultimaFruta = frutas.pop();
+console.log(ultimaFruta); // Saída: 'Melancia'
+console.log(frutas);      // Saída: ['Maçã', 'Banana', 'Morango']
+```
+
+* `includes(elemento)`: Verifica se um determinado elemento existe na lista, retornando true (verdadeiro) ou false (falso).
+
+```JavaScript
+let temBanana = frutas.includes('Banana');
+console.log(temBanana); // Saída: true
+
+let temAbacaxi = frutas.includes('Abacaxi');
+console.log(temAbacaxi); // Saída: false
+```
